@@ -5,9 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.ui.unit.ExperimentalUnitApi
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
 import uz.rdo.themovie.ui.TheMovieMainComposableRoot
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @InternalCoroutinesApi
     @ExperimentalFoundationApi
