@@ -11,6 +11,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.InternalCoroutinesApi
+import uz.rdo.coreui.MAIN_GRAPH_ROUTE
 import uz.rdo.coreui.MAIN_SCREEN_ROUTE
 import uz.rdo.coreui.theme.PrimaryTheme
 
@@ -27,7 +28,7 @@ fun TheMovieMainComposableRoot() {
         ) {
             NavHost(
                 navController = navController,
-                startDestination = MAIN_SCREEN_ROUTE
+                startDestination = MAIN_GRAPH_ROUTE
             ) {
                 mainGraph(navController = navController)
             }

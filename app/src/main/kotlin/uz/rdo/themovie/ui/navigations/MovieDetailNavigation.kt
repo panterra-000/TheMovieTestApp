@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import uz.rdo.coreui.MAIN_SCREEN_ROUTE
+import uz.rdo.coreui.MOVIE_DETAIL_SCREEN_ROUTE
 import uz.rdo.coreui.navigation.ScreenNavigationSpec
 import uz.rdo.themovie.ui.screens.MainScreen
 import uz.rdo.themovie.ui.screens.MovieDetailScreen
@@ -17,7 +18,7 @@ import uz.rdo.themovie.ui.screens.MovieDetailScreen
 object MovieDetailNavigation : ScreenNavigationSpec {
 
     override val route: String
-        get() = MAIN_SCREEN_ROUTE
+        get() = MOVIE_DETAIL_SCREEN_ROUTE
 
     @ExperimentalPagerApi
     @ExperimentalComposeUiApi

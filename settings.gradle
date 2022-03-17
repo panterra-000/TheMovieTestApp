@@ -16,3 +16,4 @@ rootProject.name = "TheMovie"
 include ':app'
 include ':core'
 include ':coreui'
+include ':remote'
