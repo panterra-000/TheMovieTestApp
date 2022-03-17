@@ -13,11 +13,13 @@ object ThemeColor {
     }
 
     private val themeLight = TheMovieColors(
-        statusBarColor = Color(0x80000000)
+        statusBarColor = Color(0xff000000),
+        primaryColor = Color(0xFF6D1010)
     )
 
     private val themeDark = TheMovieColors(
-        statusBarColor = Color(0x80000000)
+        statusBarColor = Color(0xff000000),
+        primaryColor = Color(0xFF6B1212)
     )
 
 }

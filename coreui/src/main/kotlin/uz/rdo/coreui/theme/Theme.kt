@@ -14,6 +14,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -37,16 +38,27 @@ fun PrimaryTheme(
         ) {
             MaterialTheme(
                 colors = MaterialTheme.colors.copy(
-                    primary = colors.statusBarColor,
-                    primaryVariant = colors.statusBarColor,
-                    surface = colors.statusBarColor,
-                    onPrimary = colors.statusBarColor,
-                    onSurface = colors.statusBarColor,
-                    onBackground = colors.statusBarColor,
+                    primary = colors.primaryColor,
+                    primaryVariant = colors.primaryColor,
+                    secondary = colors.primaryColor,
+                    secondaryVariant = colors.primaryColor,
+                    background =colors.primaryColor,
+                    surface = colors.primaryColor,
+                    error = colors.primaryColor,
+                    onPrimary = colors.primaryColor,
+                    onSecondary = colors.primaryColor,
+                    onBackground = colors.primaryColor,
+                    onSurface = colors.primaryColor,
+                    onError = colors.primaryColor
                 ),
                 typography = Typography,
                 shapes = Shapes,
                 content = content
+            )
+
+            val systemUiController = rememberSystemUiController()
+            systemUiController.setSystemBarsColor(
+                color = TheMovieTheme.colors.statusBarColor
             )
         }
     }
@@ -56,6 +68,7 @@ fun PrimaryTheme(
 @Immutable
 data class TheMovieColors(
     val statusBarColor: Color,
+    val primaryColor: Color,
 )
 
 val LocalColors = staticCompositionLocalOf<TheMovieColors> {
