@@ -1,4 +1,4 @@
-package uz.rdo.themovie.ui.theme
+package uz.rdo.coreui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
