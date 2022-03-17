@@ -19,6 +19,7 @@ data class MoviesResponse(
 	@SerialName("total_results")
 	val totalResults: Int? = null
 )
+
 @Serializable
 data class ResultsItem(
 
