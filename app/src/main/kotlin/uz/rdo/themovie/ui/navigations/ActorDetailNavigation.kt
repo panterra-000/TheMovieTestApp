@@ -10,6 +10,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import uz.rdo.coreui.MAIN_SCREEN_ROUTE
 import uz.rdo.coreui.navigation.ScreenNavigationSpec
+import uz.rdo.themovie.ui.screens.ActorDetailScreen
 import uz.rdo.themovie.ui.screens.MainScreen
 
 @ExperimentalUnitApi
@@ -27,7 +28,7 @@ object ActorDetailNavigation : ScreenNavigationSpec {
         navController: NavController,
         navBackStackEntry: NavBackStackEntry,
     ) {
-        MainScreen(navController)
+        ActorDetailScreen(navController)
     }
 
 }

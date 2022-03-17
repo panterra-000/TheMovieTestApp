@@ -11,6 +11,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import uz.rdo.coreui.MAIN_SCREEN_ROUTE
 import uz.rdo.coreui.navigation.ScreenNavigationSpec
 import uz.rdo.themovie.ui.screens.MainScreen
+import uz.rdo.themovie.ui.screens.MovieDetailScreen
 
 @ExperimentalUnitApi
 object MovieDetailNavigation : ScreenNavigationSpec {
@@ -27,7 +28,7 @@ object MovieDetailNavigation : ScreenNavigationSpec {
         navController: NavController,
         navBackStackEntry: NavBackStackEntry,
     ) {
-        MainScreen(navController)
+        MovieDetailScreen(navController)
     }
 
 }
