@@ -16,13 +16,13 @@ import uz.rdo.themovie.ui.viewmodels.PopularMoviesViewModel
 
 @ExperimentalPagerApi
 @Composable
-fun MainScreen(navController: NavController, viewModel: PopularMoviesViewModel = hiltViewModel()) {
-    MainScreenView(viewModel)
+fun MainScreen(navController: NavController) {
+    MainScreenView()
 }
 
 @ExperimentalPagerApi
 @Composable
-fun MainScreenView(viewModel: PopularMoviesViewModel) {
+fun MainScreenView() {
     val pageTitles = listOf(
         stringResource(id = R.string._title_popular),
         stringResource(id = R.string._title_top_rated),
@@ -33,13 +33,13 @@ fun MainScreenView(viewModel: PopularMoviesViewModel) {
         HorizontalPagerWithTabRow(pageTitles) { page ->
             when (page) {
                 0 -> {
-                    PopularMoviesScreen(viewModel = viewModel)
+                    PopularMoviesScreen()
                 }
                 1 -> {
-                    TopRatedMoviesScreen(viewModel = viewModel)
+                    TopRatedMoviesScreen()
                 }
                 else -> {
-                    UpcomingMoviesScreen(viewModel = viewModel)
+                    UpcomingMoviesScreen()
                 }
             }
         }

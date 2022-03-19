@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSizeWithPadding
 import uz.rdo.coreui.composable.views.AppLoaderCenter
 import uz.rdo.coreui.composable.views.MoviesGrid
@@ -11,7 +12,10 @@ import uz.rdo.remote.data.response.MovieItem
 import uz.rdo.themovie.ui.viewmodels.PopularMoviesViewModel
 
 @Composable
-fun PopularMoviesScreen(viewModel: PopularMoviesViewModel) {
+fun PopularMoviesScreen(
+    viewModel: PopularMoviesViewModel = hiltViewModel(),
+    onMovieClick: (MovieItem) -> Unit
+) {
 
     val context = LocalContext.current
 
@@ -29,7 +33,9 @@ fun PopularMoviesScreen(viewModel: PopularMoviesViewModel) {
         PopularMoviesScreenView(
             it,
             nextPage = { viewModel.getPopularMovies() },
-            itemClick = {}
+            itemClick = { movie ->
+                onMovieClick(movie)
+            }
         )
     }
 
