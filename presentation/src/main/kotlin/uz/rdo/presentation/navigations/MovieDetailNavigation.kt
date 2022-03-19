@@ -32,7 +32,7 @@ object MovieDetailNavigation : ScreenNavigationSpec {
         navBackStackEntry: NavBackStackEntry,
     ) {
         MovieDetailScreen(
-            movieId = navBackStackEntry.arguments?.getLong(MOVIE_ID) ?: 0,
+            movieId = navBackStackEntry.arguments?.getString(MOVIE_ID) ?: "0",
             navController = navController
         )
     }

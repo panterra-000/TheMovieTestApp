@@ -4,5 +4,5 @@ import uz.rdo.core.NetworkResponse
 import uz.rdo.remote.data.response.detail.MovieDetailResponse
 
 interface MovieDetailService {
-    suspend fun getMovieDetailData(movieId: Long): NetworkResponse<MovieDetailResponse>
+    suspend fun getMovieDetailData(movieId: String): NetworkResponse<MovieDetailResponse>
 }

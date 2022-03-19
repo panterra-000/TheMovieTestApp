@@ -1,9 +1,6 @@
 package uz.rdo.coreui.composable.views
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,8 +14,7 @@ fun AppLoaderCenter() {
         CircularProgressIndicator(
             color = TheMovieTheme.colors.primaryButtonBackground,
             modifier = Modifier
-                .width(23.dp)
-                .height(23.dp)
+                .size(48.dp)
         )
     }
 }

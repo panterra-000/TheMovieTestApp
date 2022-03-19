@@ -10,7 +10,7 @@ import javax.inject.Inject
 class MovieDetailServiceImpl @Inject constructor(private val httpClient: HttpClient) :
     MovieDetailService {
 
-    override suspend fun getMovieDetailData(movieId: Long): NetworkResponse<MovieDetailResponse> {
+    override suspend fun getMovieDetailData(movieId: String): NetworkResponse<MovieDetailResponse> {
         return getCatching {
             httpClient.getJson(urlAddress = "$MOVIE_DETAIL/$movieId")
         }
