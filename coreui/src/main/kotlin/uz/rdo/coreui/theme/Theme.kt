@@ -38,18 +38,12 @@ fun PrimaryTheme(
         ) {
             MaterialTheme(
                 colors = MaterialTheme.colors.copy(
-                    primary = colors.primaryColor,
-                    primaryVariant = colors.primaryColor,
-                    secondary = colors.primaryColor,
-                    secondaryVariant = colors.primaryColor,
-                    background =colors.primaryColor,
-                    surface = colors.primaryColor,
-                    error = colors.primaryColor,
-                    onPrimary = colors.primaryColor,
-                    onSecondary = colors.primaryColor,
-                    onBackground = colors.primaryColor,
-                    onSurface = colors.primaryColor,
-                    onError = colors.primaryColor
+                    primary = colors.primary,
+                    primaryVariant = colors.primaryVariant,
+                    surface = colors.surface,
+                    onPrimary = colors.primaryButtonText,
+                    onSurface = colors.secondaryText,
+                    onBackground = colors.primaryButtonBackground,
                 ),
                 typography = Typography,
                 shapes = Shapes,
@@ -58,7 +52,7 @@ fun PrimaryTheme(
 
             val systemUiController = rememberSystemUiController()
             systemUiController.setSystemBarsColor(
-                color = TheMovieTheme.colors.statusBarColor
+                color = TheMovieTheme.colors.statusBar
             )
         }
     }
@@ -67,8 +61,19 @@ fun PrimaryTheme(
 
 @Immutable
 data class TheMovieColors(
-    val statusBarColor: Color,
-    val primaryColor: Color,
+    val statusBar: Color,
+    val primary: Color,
+    val primaryVariant: Color,
+    val surface: Color,
+    val primaryButtonText: Color,
+    val secondaryText: Color,
+    val primaryButtonBackground: Color,
+    val secondaryButtonText: Color,
+    val additionalText: Color,
+    val primaryText: Color,
+    val secondaryButtonBackground: Color,
+    val activeIconTint: Color,
+    val inactiveIconTint: Color,
 )
 
 val LocalColors = staticCompositionLocalOf<TheMovieColors> {

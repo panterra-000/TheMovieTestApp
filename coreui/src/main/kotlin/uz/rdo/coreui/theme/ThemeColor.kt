@@ -13,13 +13,44 @@ object ThemeColor {
     }
 
     private val themeLight = TheMovieColors(
-        statusBarColor = Color(0xff000000),
-        primaryColor = Color(0xFF6D1010)
+        statusBar = Color(0xff000000),
+        primary = Color(0xff000000),
+        primaryVariant = Color(0xff000000),
+        surface = Color(0xff000000),
+
+        primaryButtonText = Color(0xff000000),
+        secondaryButtonText = Color(0xffffffff),
+
+        primaryText = Color(0xffffffff),
+        secondaryText = Color(0xff929294),
+        additionalText = Color(0xff929294),
+
+        primaryButtonBackground = Color(0xffFF9F0A),
+        secondaryButtonBackground = Color(0xff2B2B2D),
+
+        activeIconTint = Color(0xffffffff),
+        inactiveIconTint = Color(0xff929294),
     )
 
     private val themeDark = TheMovieColors(
-        statusBarColor = Color(0xff000000),
-        primaryColor = Color(0xFF6B1212)
+        statusBar = Color(0xff000000),
+        primary = Color(0xff000000),
+        primaryVariant = Color(0xff000000),
+        surface = Color(0xff000000),
+
+        primaryButtonText = Color(0xff000000),
+        secondaryButtonText = Color(0xffffffff),
+
+        primaryText = Color(0xffffffff),
+        secondaryText = Color(0xff929294),
+        additionalText = Color(0xff929294),
+
+        primaryButtonBackground = Color(0xffFF9F0A),
+        secondaryButtonBackground = Color(0xff2B2B2D),
+
+        activeIconTint = Color(0xffffffff),
+        inactiveIconTint = Color(0xff929294),
     )
+
 
 }
