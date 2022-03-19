@@ -43,6 +43,7 @@ android {
 
 dependencies {
     api(project(":core"))
+    api(project(":remote"))
 
     api('androidx.core:core-ktx:1.7.0')
 
