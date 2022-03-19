@@ -29,7 +29,6 @@ fun PopularMoviesScreenView(popularMovies: List<MovieItem?>) {
             items = popularMovies,
             nextPage = { Log.d("TAG_090", "PopularMoviesScreenView: size size next page Handle") },
             onclick = {
-
             }
         )
 

@@ -4,6 +4,8 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -40,8 +42,13 @@ fun MoviesGrid(items: List<MovieItem?>, nextPage: () -> Unit, onclick: (MovieIte
 
 @Composable
 fun MovieItemView(item: MovieItem, onclick: () -> Unit) {
-    Column(Modifier.clickable { onclick() }) {
-        CorneredImageView(height = 80.dp, url = item.backdropPath)
+    Column(
+        Modifier
+            .padding(10.dp)
+            .height(160.dp)) {
+        CorneredImageView(url = item.backdropPath) {
+            onclick()
+        }
         Spacer2dp()
         Text14sp(text = item.title.toString())
     }
