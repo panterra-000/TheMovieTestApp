@@ -16,7 +16,7 @@ import uz.rdo.remote.service.main.MainService
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val service: MainService) : ViewModel() {
+class PopularMoviesViewModel @Inject constructor(private val service: MainService) : ViewModel() {
 
     private val _popularMoviesState: MutableState<List<MovieItem?>?> = mutableStateOf(null)
     val popularMoviesState: State<List<MovieItem?>?> get() = _popularMoviesState
@@ -30,22 +30,24 @@ class MainViewModel @Inject constructor(private val service: MainService) : View
     private var popularCounterState = 1
 
     fun getPopularMovies() {
-        loaderState.value = true
-        viewModelScope.launch() {
-            when (val resp = service.getPopularMovies(popularCounterState)) {
-                is NetworkResponse.Success -> {
-                    val list: ArrayList<MovieItem?> = ArrayList()
-                    _popularMoviesState.value?.let { list.addAll(it) }
-                    resp.result.results?.let { list.addAll(it) }
-                    _popularMoviesState.value = list
-                    loaderState.value = false
-                    popularCounterState++
-                    Log.d("TAG909", "getPopularMovies (MainViewModel): ${resp.result.results} ")
-                }
-                is NetworkResponse.Error -> {
-                    loaderState.value = false
-                    _errorState.send(resp)
-                    Log.d("TAG909", "getPopularMovies (MainViewModel): ${resp.message} ")
+        if (!loaderState.value) {
+            loaderState.value = true
+            viewModelScope.launch() {
+                when (val resp = service.getPopularMovies(popularCounterState)) {
+                    is NetworkResponse.Success -> {
+                        val list: ArrayList<MovieItem?> = ArrayList()
+                        _popularMoviesState.value?.let { list.addAll(it) }
+                        resp.result.results?.let { list.addAll(it) }
+                        _popularMoviesState.value = list
+                        loaderState.value = false
+                        popularCounterState++
+                        Log.d("TAG909", "getPopularMovies (MainViewModel): ${resp.result.results} ")
+                    }
+                    is NetworkResponse.Error -> {
+                        loaderState.value = false
+                        _errorState.send(resp)
+                        Log.d("TAG909", "getPopularMovies (MainViewModel): ${resp.message} ")
+                    }
                 }
             }
         }

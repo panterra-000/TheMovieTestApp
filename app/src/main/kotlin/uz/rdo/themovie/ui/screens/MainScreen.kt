@@ -12,17 +12,17 @@ import uz.rdo.themovie.R
 import uz.rdo.themovie.ui.mainpages.PopularMoviesScreen
 import uz.rdo.themovie.ui.mainpages.TopRatedMoviesScreen
 import uz.rdo.themovie.ui.mainpages.UpcomingMoviesScreen
-import uz.rdo.themovie.ui.viewmodels.MainViewModel
+import uz.rdo.themovie.ui.viewmodels.PopularMoviesViewModel
 
 @ExperimentalPagerApi
 @Composable
-fun MainScreen(navController: NavController, viewModel: MainViewModel = hiltViewModel()) {
+fun MainScreen(navController: NavController, viewModel: PopularMoviesViewModel = hiltViewModel()) {
     MainScreenView(viewModel)
 }
 
 @ExperimentalPagerApi
 @Composable
-fun MainScreenView(viewModel: MainViewModel) {
+fun MainScreenView(viewModel: PopularMoviesViewModel) {
     val pageTitles = listOf(
         stringResource(id = R.string._title_popular),
         stringResource(id = R.string._title_top_rated),
