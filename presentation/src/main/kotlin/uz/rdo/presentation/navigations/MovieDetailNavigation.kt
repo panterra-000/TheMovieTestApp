@@ -15,8 +15,12 @@ import uz.rdo.presentation.screens.MovieDetailScreen
 @ExperimentalUnitApi
 object MovieDetailNavigation : ScreenNavigationSpec {
 
+    private const val MOVIE_ID = "movie_id"
+
     override val route: String
-        get() = MOVIE_DETAIL_SCREEN_ROUTE
+        get() = "$MOVIE_DETAIL_SCREEN_ROUTE/{$MOVIE_ID}"
+
+    fun createRoute(movieId: Long) = "$MOVIE_DETAIL_SCREEN_ROUTE/$movieId"
 
     @ExperimentalPagerApi
     @ExperimentalComposeUiApi
@@ -27,7 +31,10 @@ object MovieDetailNavigation : ScreenNavigationSpec {
         navController: NavController,
         navBackStackEntry: NavBackStackEntry,
     ) {
-        MovieDetailScreen(navController)
+        MovieDetailScreen(
+            movieId = navBackStackEntry.arguments?.getLong(MOVIE_ID) ?: 0,
+            navController = navController
+        )
     }
 
 }
