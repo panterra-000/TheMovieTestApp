@@ -1,7 +1,9 @@
 package uz.rdo.themovie.ui.mainpages
 
+import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSizeWithPadding
 import uz.rdo.coreui.composable.base.textfields.SearchTextFieldRounded
 import uz.rdo.coreui.composable.views.AppLoaderCenter
@@ -11,8 +13,17 @@ import uz.rdo.themovie.ui.viewmodels.MainViewModel
 
 @Composable
 fun PopularMoviesScreen(viewModel: MainViewModel) {
+
+    val context = LocalContext.current
+
     LaunchedEffect(key1 = Unit, block = {
         viewModel.getPopularMovies()
+    })
+
+    LaunchedEffect(key1 = Unit, block = {
+        viewModel.errorState.collect {
+            Toast.makeText(context, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
+        }
     })
 
     viewModel.popularMoviesState.value?.let {

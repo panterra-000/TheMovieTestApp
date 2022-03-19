@@ -2,7 +2,7 @@ package uz.rdo.remote.service.main
 
 import io.ktor.client.*
 import io.ktor.client.request.*
-import uz.rdo.core.BaseResponse
+import uz.rdo.core.NetworkResponse
 import uz.rdo.core.util.ktor.getCatching
 import uz.rdo.core.util.ktor.getJson
 import uz.rdo.remote.data.response.MoviesResponse
@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class MainServiceImpl @Inject constructor(private val httpClient: HttpClient) : MainService {
 
-    override suspend fun getPopularMovies(page: Int): BaseResponse<MoviesResponse> {
+    override suspend fun getPopularMovies(page: Int): NetworkResponse<MoviesResponse> {
         return getCatching {
             httpClient.getJson(urlAddress = POPULAR)
             {
