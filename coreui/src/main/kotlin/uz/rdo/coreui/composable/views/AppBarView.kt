@@ -28,7 +28,7 @@ const val BOTTOM_BAR_HEIGHT = 56
 
 
 @Composable
-fun AppBarViewWithIcons(title: String, startIconClick: () -> Unit, endIconClick: () -> Unit) {
+fun AppBarViewWithIcons(title: String, startIconClick: () -> Unit) {
     TopAppBar(backgroundColor = TheMovieTheme.colors.primary) {
         Icon(
             painter = painterResource(id = R.drawable.ic_back),

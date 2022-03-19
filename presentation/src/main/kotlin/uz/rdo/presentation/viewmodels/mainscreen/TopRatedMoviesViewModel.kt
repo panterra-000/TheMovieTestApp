@@ -1,4 +1,4 @@
-package uz.rdo.presentation.viewmodels
+package uz.rdo.presentation.viewmodels.mainscreen
 
 import android.util.Log
 import androidx.compose.runtime.MutableState
@@ -16,7 +16,7 @@ import uz.rdo.remote.service.main.MainService
 import javax.inject.Inject
 
 @HiltViewModel
-class UpcomingMoviesViewModel @Inject constructor(private val service: MainService) : ViewModel() {
+class TopRatedMoviesViewModel @Inject constructor(private val service: MainService) : ViewModel() {
 
     private val _moviesState: MutableState<List<MovieItem?>?> = mutableStateOf(null)
     val moviesState: State<List<MovieItem?>?> get() = _moviesState
@@ -29,11 +29,11 @@ class UpcomingMoviesViewModel @Inject constructor(private val service: MainServi
 
     private var mounterState = 1
 
-    fun getUpcomingMovies() {
+    fun getTopRatedMovies() {
         if (!loaderState.value) {
             loaderState.value = true
             viewModelScope.launch() {
-                when (val resp = service.getUpcomingMovies(mounterState)) {
+                when (val resp = service.getTopRatedMovies(mounterState)) {
                     is NetworkResponse.Success -> {
                         val list: ArrayList<MovieItem?> = ArrayList()
                         _moviesState.value?.let { list.addAll(it) }
@@ -41,12 +41,12 @@ class UpcomingMoviesViewModel @Inject constructor(private val service: MainServi
                         _moviesState.value = list
                         loaderState.value = false
                         mounterState++
-                        Log.d("TAG909", "getUpcomingMovies(): ${resp.result.results} ")
+                        Log.d("TAG909", "getTopRatedMovies(): ${resp.result.results} ")
                     }
                     is NetworkResponse.Error -> {
                         loaderState.value = false
                         _errorState.send(resp)
-                        Log.d("TAG909", "getUpcomingMovies(): ${resp.message} ")
+                        Log.d("TAG909", "getTopRatedMovies(): ${resp.message} ")
                     }
                 }
             }

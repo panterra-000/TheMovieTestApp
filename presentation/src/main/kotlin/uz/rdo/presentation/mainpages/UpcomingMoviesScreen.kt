@@ -9,7 +9,7 @@ import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSizeWithPadding
 import uz.rdo.coreui.composable.views.AppLoaderCenter
 import uz.rdo.coreui.composable.views.MoviesGrid
 import uz.rdo.remote.data.response.MovieItem
-import uz.rdo.presentation.viewmodels.UpcomingMoviesViewModel
+import uz.rdo.presentation.viewmodels.mainscreen.UpcomingMoviesViewModel
 
 @Composable
 fun UpcomingMoviesScreen(

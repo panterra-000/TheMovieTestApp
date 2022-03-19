@@ -67,7 +67,7 @@ data class MovieDetailResponse(
     val voteAverage: Double? = null,
 
     @SerialName("belongs_to_collection")
-    val belongsToCollection: String? = null,
+    val belongsToCollection: BelongsToCollection? = null,
 
     @SerialName("tagline")
     val tagline: String? = null,
@@ -126,4 +126,21 @@ data class SpokenLanguagesItem(
 
     @SerialName("iso_639_1")
     val iso6391: String? = null
+)
+
+
+@Serializable
+data class BelongsToCollection(
+
+    @SerialName("id")
+    val id: Long? = null,
+
+    @SerialName("name")
+    val name: String? = null,
+
+    @SerialName("poster_path")
+    val posterPath: String? = null,
+
+    @SerialName("backdrop_path")
+    val backdropPath: String? = null,
 )
