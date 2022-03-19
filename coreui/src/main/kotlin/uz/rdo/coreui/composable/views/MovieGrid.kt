@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import uz.rdo.coreui.composable.base.Spacer2dp
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSize
+import uz.rdo.coreui.composable.base.texts.EllipsizeText12sp
 import uz.rdo.coreui.composable.base.texts.Text14sp
 import uz.rdo.remote.data.response.MovieItem
 
@@ -45,11 +46,12 @@ fun MovieItemView(item: MovieItem, onclick: () -> Unit) {
     Column(
         Modifier
             .padding(10.dp)
-            .height(160.dp)) {
-        CorneredImageView(url = item.backdropPath) {
+            .height(170.dp)
+    ) {
+        CorneredImageView(url = item.posterPath) {
             onclick()
         }
         Spacer2dp()
-        Text14sp(text = item.title.toString())
+        EllipsizeText12sp(text = item.title.toString())
     }
 }

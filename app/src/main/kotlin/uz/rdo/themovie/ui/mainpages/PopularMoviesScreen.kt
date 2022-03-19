@@ -1,11 +1,10 @@
 package uz.rdo.themovie.ui.mainpages
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSizeWithPadding
 import uz.rdo.coreui.composable.base.textfields.SearchTextFieldRounded
-import uz.rdo.coreui.composable.base.texts.Text16spSecondary
+import uz.rdo.coreui.composable.views.AppLoaderCenter
 import uz.rdo.coreui.composable.views.MoviesGrid
 import uz.rdo.remote.data.response.MovieItem
 import uz.rdo.themovie.ui.viewmodels.MainViewModel
@@ -16,19 +15,33 @@ fun PopularMoviesScreen(viewModel: MainViewModel) {
         viewModel.getPopularMovies()
     })
 
-    viewModel.popularMoviesState.value?.let { PopularMoviesScreenView(it) }
+    viewModel.popularMoviesState.value?.let {
+        PopularMoviesScreenView(
+            it,
+            nextPage = { viewModel.getPopularMovies() },
+            itemClick = {}
+        )
+    }
+
+    if (viewModel.loaderState.value) {
+        AppLoaderCenter()
+    }
 }
 
 @Composable
-fun PopularMoviesScreenView(popularMovies: List<MovieItem?>) {
+fun PopularMoviesScreenView(
+    popularMovies: List<MovieItem?>,
+    nextPage: () -> Unit,
+    itemClick: (MovieItem) -> Unit
+) {
     ColumnFillMaxSizeWithPadding {
         SearchTextFieldRounded() {
         }
-        Text16spSecondary(text = "Popular")
         MoviesGrid(
             items = popularMovies,
-            nextPage = { Log.d("TAG_090", "PopularMoviesScreenView: size size next page Handle") },
+            nextPage = { nextPage() },
             onclick = {
+                itemClick(it)
             }
         )
 

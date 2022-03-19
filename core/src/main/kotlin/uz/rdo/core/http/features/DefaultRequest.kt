@@ -6,13 +6,13 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import uz.rdo.core.BuildConfig
 
-private const val HEADER_API_KEY = "api_key"
-private const val HEADER_API_KEY_VALUE = "d07b7816061513f52e0c20ab6d96fa00"
+private const val API_KEY = "api_key"
+private const val API_KEY_VALUE = "d07b7816061513f52e0c20ab6d96fa00"
 
 internal fun HttpClientConfig<*>.defaultRequest() = install(DefaultRequest) {
     url.protocol = URLProtocol.HTTPS
     url.withBaseUrl()
-//    header(HEADER_API_KEY, HEADER_API_KEY_VALUE)
+    parameter(API_KEY, API_KEY_VALUE)
 }
 
 

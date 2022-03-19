@@ -4,6 +4,6 @@ import uz.rdo.core.BaseResponse
 import uz.rdo.remote.data.response.MoviesResponse
 
 interface MainService {
-    suspend fun getPopularMovies() : BaseResponse<MoviesResponse>
+    suspend fun getPopularMovies(page: Int): BaseResponse<MoviesResponse>
 
 }

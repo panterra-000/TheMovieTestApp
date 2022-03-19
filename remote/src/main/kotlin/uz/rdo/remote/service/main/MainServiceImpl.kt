@@ -10,13 +10,13 @@ import javax.inject.Inject
 
 class MainServiceImpl @Inject constructor(private val httpClient: HttpClient) : MainService {
 
-    override suspend fun getPopularMovies(): BaseResponse<MoviesResponse> {
-      return getCatching {
-        httpClient.getJson(urlAddress = POPULAR)
-        {
-            parameter("api_key","d07b7816061513f52e0c20ab6d96fa00")
+    override suspend fun getPopularMovies(page: Int): BaseResponse<MoviesResponse> {
+        return getCatching {
+            httpClient.getJson(urlAddress = POPULAR)
+            {
+                parameter("page", page)
+            }
         }
-      }
     }
 
 

@@ -32,6 +32,8 @@ fun Text14sp(text: String, color: Color = TheMovieTheme.colors.primaryText) {
     )
 }
 
+
+
 @Composable
 fun Text16sp(text: String, color: Color = TheMovieTheme.colors.primaryText) {
     Text(
