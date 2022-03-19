@@ -19,6 +19,23 @@ class MainServiceImpl @Inject constructor(private val httpClient: HttpClient) : 
         }
     }
 
+    override suspend fun getTopRatedMovies(page: Int): NetworkResponse<MoviesResponse> {
+        return getCatching {
+            httpClient.getJson(urlAddress = TOP_RATED)
+            {
+                parameter("page", page)
+            }
+        }
+    }
+
+    override suspend fun getUpcomingMovies(page: Int): NetworkResponse<MoviesResponse> {
+        return getCatching {
+            httpClient.getJson(urlAddress = UPCOMING)
+            {
+                parameter("page", page)
+            }
+        }
+    }
 
     private companion object {
         const val POPULAR: String = "movie/popular"

@@ -5,5 +5,7 @@ import uz.rdo.remote.data.response.MoviesResponse
 
 interface MainService {
     suspend fun getPopularMovies(page: Int): NetworkResponse<MoviesResponse>
+    suspend fun getTopRatedMovies(page: Int): NetworkResponse<MoviesResponse>
+    suspend fun getUpcomingMovies(page: Int): NetworkResponse<MoviesResponse>
 
 }
