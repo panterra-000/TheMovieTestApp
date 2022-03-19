@@ -14,10 +14,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.pagerTabIndicatorOffset
-import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
 import uz.rdo.coreui.composable.base.texts.Text14sp
 import uz.rdo.coreui.composable.base.texts.Text48sp
@@ -25,7 +22,10 @@ import uz.rdo.coreui.theme.TheMovieTheme
 
 @ExperimentalPagerApi
 @Composable
-fun ColumnScope.HorizontalPagerWithTabRow(list: List<String>) {
+fun ColumnScope.HorizontalPagerWithTabRow(
+    list: List<String>,
+    content: @Composable PagerScope.(page: Int) -> Unit
+) {
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
 
@@ -64,7 +64,7 @@ fun ColumnScope.HorizontalPagerWithTabRow(list: List<String>) {
         }
 
         HorizontalPager(list.size, state = pagerState) { page ->
-            Text48sp(text = list[page])
+            content(page)
         }
     }
 }
