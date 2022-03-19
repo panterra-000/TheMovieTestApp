@@ -41,7 +41,6 @@ fun MainScreenView(viewModel: MainViewModel) {
                 else -> {
                     UpcomingMoviesScreen(viewModel = viewModel)
                 }
-
             }
         }
     }

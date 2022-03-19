@@ -74,6 +74,7 @@ data class TheMovieColors(
     val secondaryButtonBackground: Color,
     val activeIconTint: Color,
     val inactiveIconTint: Color,
+    val indicatorTint: Color,
 )
 
 val LocalColors = staticCompositionLocalOf<TheMovieColors> {

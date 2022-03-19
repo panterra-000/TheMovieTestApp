@@ -38,9 +38,9 @@ fun ColumnScope.HorizontalPagerWithTabRow(
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
                     Modifier
-                        .padding(horizontal = 3.dp)
+                        .padding(horizontal = 1.dp)
                         .pagerTabIndicatorOffset(pagerState, tabPositions),
-                    color = TheMovieTheme.colors.activeIconTint
+                    color = TheMovieTheme.colors.indicatorTint
                 )
             },
         ) {
