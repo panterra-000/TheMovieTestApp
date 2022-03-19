@@ -53,6 +53,7 @@ dependencies {
 
     implementation(project(":coreui"))
     implementation(project(":remote"))
+    implementation(project(":presentation"))
 
 
     implementation 'androidx.core:core-ktx:1.7.0'
