@@ -61,8 +61,10 @@ fun CorneredImageView(height: Dp = 130.dp, url: String?, onclick: () -> Unit) {
 @Composable
 fun BackDropImageWithAlpha(height: Dp = 240.dp, url: String?, onclick: () -> Unit) {
     Surface(
-        color = Color.Black.copy(alpha = 0.6f),
-        modifier = Modifier.fillMaxSize()
+        color = Color.Black.copy(alpha = 0.2f),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(height)
     ) {
         Image(
             painter = rememberImagePainter(
@@ -75,9 +77,7 @@ fun BackDropImageWithAlpha(height: Dp = 240.dp, url: String?, onclick: () -> Uni
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .fillMaxWidth()
-                .height(height = height)
-                .clip(RoundedCornerShape(20.dp))
+                .fillMaxSize()
                 .clickable {
                     onclick()
                 },

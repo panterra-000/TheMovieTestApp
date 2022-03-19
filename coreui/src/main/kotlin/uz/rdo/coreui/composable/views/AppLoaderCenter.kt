@@ -14,7 +14,7 @@ fun AppLoaderCenter() {
         CircularProgressIndicator(
             color = TheMovieTheme.colors.primaryButtonBackground,
             modifier = Modifier
-                .size(48.dp)
+                .size(36.dp)
         )
     }
 }
