@@ -123,17 +123,21 @@ fun MainDetailView(movie: MovieDetailResponse) {
 
 @Composable
 fun CastView(list: List<CastItem?>) {
-    LazyRow() {
-        items(list) { actor ->
-            if (actor != null) {
-                PersonItemView(
-                    fullName = actor.name.toString(),
-                    character = actor.character.toString(),
-                    avatarUrl = actor.profilePath
-                )
+    ColumnFillMaxWidthPadding {
+        Spacer20dp()
+        Text16spBold(text = stringResource(R.string._cast))
+        Spacer20dp()
+        LazyRow() {
+            items(list) { actor ->
+                if (actor != null) {
+                    PersonItemView(
+                        fullName = actor.name.toString(),
+                        character = actor.character.toString(),
+                        avatarUrl = actor.profilePath
+                    )
+                }
             }
         }
     }
 }
-
 

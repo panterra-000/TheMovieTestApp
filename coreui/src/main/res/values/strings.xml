@@ -12,6 +12,7 @@
 
     <!--Movie Detail-->
     <string name="_overview">Overview</string>
+    <string name="_cast">Cast</string>
     <string name="_facts">Facts</string>
     <string name="_status">Status</string>
     <string name="_realise_date">Realise Date</string>

@@ -16,8 +16,8 @@ import uz.rdo.coreui.composable.views.RoundedImageView
 fun PersonItemView(fullName: String, character: String, avatarUrl: String?) {
     Column(
         Modifier
-            .padding(5.dp)
-            .width(120.dp)
+            .padding(end = 5.dp)
+            .width(100.dp)
     ) {
         RoundedImageView(size = 100, url = avatarUrl)
         Spacer10dp()
