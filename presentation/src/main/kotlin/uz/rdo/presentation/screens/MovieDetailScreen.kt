@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import uz.rdo.coreui.R
@@ -23,10 +24,12 @@ import uz.rdo.coreui.composable.views.AppBarViewWithIcons
 import uz.rdo.coreui.composable.views.AppLoader
 import uz.rdo.coreui.composable.views.MovieHeaderWithImage
 import uz.rdo.coreui.utils.timeSeparation
+import uz.rdo.presentation.navigations.ActorDetailNavigation
 import uz.rdo.presentation.viewmodels.MovieDetailViewModel
 import uz.rdo.remote.data.response.CastItem
 import uz.rdo.remote.data.response.detail.MovieDetailResponse
 
+@ExperimentalUnitApi
 @Composable
 fun MovieDetailScreen(
     movieId: String,
@@ -46,13 +49,21 @@ fun MovieDetailScreen(
         }
     })
 
-    MovieDetailScreenView(viewModel = viewModel) {
+    MovieDetailScreenView(viewModel = viewModel, backClick = {
         navController.navigateUp()
-    }
+    }, castClick = { actor ->
+        if (actor.id != null) {
+            navController.navigate(ActorDetailNavigation.createRoute(actor.id!!))
+        }
+    })
 }
 
 @Composable
-fun MovieDetailScreenView(viewModel: MovieDetailViewModel, backClick: () -> Unit) {
+fun MovieDetailScreenView(
+    viewModel: MovieDetailViewModel,
+    backClick: () -> Unit,
+    castClick: (CastItem) -> Unit
+) {
     ColumnScrollableFillMaxSize {
         AppBarViewWithIcons(title = stringResource(R.string._title_detail),
             startIconClick = {
@@ -71,7 +82,9 @@ fun MovieDetailScreenView(viewModel: MovieDetailViewModel, backClick: () -> Unit
             AppLoader()
         } else {
             viewModel.movieCreditsState.value?.let { cast ->
-                CastView(cast)
+                CastView(cast) { actor ->
+                    castClick(actor)
+                }
             }
         }
     }
@@ -122,7 +135,7 @@ fun MainDetailView(movie: MovieDetailResponse) {
 }
 
 @Composable
-fun CastView(list: List<CastItem?>) {
+fun CastView(list: List<CastItem?>, itemClick: (CastItem) -> Unit) {
     ColumnFillMaxWidthPadding {
         Spacer20dp()
         Text16spBold(text = stringResource(R.string._cast))
@@ -134,10 +147,14 @@ fun CastView(list: List<CastItem?>) {
                         fullName = actor.name.toString(),
                         character = actor.character.toString(),
                         avatarUrl = actor.profilePath
-                    )
+                    ) {
+                        itemClick(actor)
+
+                    }
                 }
             }
         }
+
     }
 }
 

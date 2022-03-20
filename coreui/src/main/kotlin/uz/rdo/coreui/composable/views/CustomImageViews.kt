@@ -22,7 +22,7 @@ import uz.rdo.coreui.R
 import uz.rdo.coreui.theme.TheMovieTheme
 
 @Composable
-fun RoundedImageView(size: Int, url: String?) {
+fun RoundedImageView(size: Int, url: String?, onclick: () -> Unit) {
 
     Image(
         painter = rememberImagePainter(
@@ -35,6 +35,7 @@ fun RoundedImageView(size: Int, url: String?) {
         contentScale = ContentScale.Crop,
         modifier = Modifier
             .size(size.dp)
+            .clickable { onclick() }
             .clip(RoundedCornerShape(size / 2)),
     )
 }

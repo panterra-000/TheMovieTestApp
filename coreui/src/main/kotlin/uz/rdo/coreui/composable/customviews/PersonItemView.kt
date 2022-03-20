@@ -13,13 +13,15 @@ import uz.rdo.coreui.composable.base.texts.Text16spBold
 import uz.rdo.coreui.composable.views.RoundedImageView
 
 @Composable
-fun PersonItemView(fullName: String, character: String, avatarUrl: String?) {
+fun PersonItemView(fullName: String, character: String, avatarUrl: String?, onclick: () -> Unit) {
     Column(
         Modifier
-            .padding(end = 5.dp)
+            .padding(end = 10.dp)
             .width(100.dp)
     ) {
-        RoundedImageView(size = 100, url = avatarUrl)
+        RoundedImageView(size = 100, url = avatarUrl) {
+            onclick()
+        }
         Spacer10dp()
         Text16spBold(text = fullName)
         Text14spSecondary(text = character)
