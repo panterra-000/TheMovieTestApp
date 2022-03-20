@@ -30,11 +30,6 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController) {
                 screen.arguments,
                 screen.deepLinks,
             ) {
-
-//                val navigationGraphEntry = remember {
-//                    return@remember navController.getBackStackEntry(MAIN_GRAPH_ROUTE)
-//                }
-
                 screen.Content(
                     navController = navController,
                     navBackStackEntry = it,
