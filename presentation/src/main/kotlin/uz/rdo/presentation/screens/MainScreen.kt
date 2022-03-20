@@ -7,15 +7,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
+import uz.rdo.coreui.R
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSize
 import uz.rdo.coreui.composable.base.viewpager.HorizontalPagerWithTabRow
 import uz.rdo.coreui.composable.views.AppBarView
-import uz.rdo.coreui.R
+import uz.rdo.coreui.viewdata.MovieItemViewData
 import uz.rdo.presentation.mainpages.PopularMoviesScreen
 import uz.rdo.presentation.mainpages.TopRatedMoviesScreen
 import uz.rdo.presentation.mainpages.UpcomingMoviesScreen
 import uz.rdo.presentation.navigations.MovieDetailNavigation
-import uz.rdo.remote.data.response.movie.MovieItem
 
 @ExperimentalUnitApi
 @ExperimentalPagerApi
@@ -38,7 +38,7 @@ fun MainScreen(navController: NavController) {
 
 @ExperimentalPagerApi
 @Composable
-fun MainScreenView(clickMovieItem: (MovieItem) -> Unit) {
+fun MainScreenView(clickMovieItem: (MovieItemViewData) -> Unit) {
     val pageTitles = listOf(
         stringResource(id = R.string._search),
         stringResource(id = R.string._title_top_rated),

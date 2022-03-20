@@ -8,6 +8,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSizeWithPadding
 import uz.rdo.coreui.composable.views.AppLoaderCenter
 import uz.rdo.coreui.composable.customviews.MoviesGrid
+import uz.rdo.coreui.viewdata.MovieItemViewData
+import uz.rdo.coreui.viewdata.movieMapper
 import uz.rdo.remote.data.response.movie.MovieItem
 import uz.rdo.presentation.viewmodels.mainscreen.TopRatedMoviesViewModel
 
@@ -15,7 +17,7 @@ import uz.rdo.presentation.viewmodels.mainscreen.TopRatedMoviesViewModel
 @Composable
 fun TopRatedMoviesScreen(
     viewModel: TopRatedMoviesViewModel = hiltViewModel(),
-    onMovieClick: (MovieItem) -> Unit
+    onMovieClick: (MovieItemViewData) -> Unit
 ) {
 
     val context = LocalContext.current
@@ -49,13 +51,13 @@ fun TopRatedMoviesScreen(
 fun TopRatedMoviesScreenView(
     popularMovies: List<MovieItem?>,
     nextPage: () -> Unit,
-    itemClick: (MovieItem) -> Unit
+    itemClick: (MovieItemViewData) -> Unit
 ) {
     ColumnFillMaxSizeWithPadding {
 //        SearchTextFieldRounded() {
 //        }
         MoviesGrid(
-            items = popularMovies,
+            itemData = popularMovies.movieMapper(),
             nextPage = { nextPage() },
             onclick = {
                 itemClick(it)

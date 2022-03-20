@@ -20,10 +20,10 @@ fun EllipsizeText12sp(text: String, color: Color = TheMovieTheme.colors.primaryT
 }
 
 @Composable
-fun EllipsizeText14sp(text: String, color: Color = TheMovieTheme.colors.primaryText) {
+fun EllipsizeText16sp(text: String, color: Color = TheMovieTheme.colors.primaryText) {
     Text(
         text = text,
-        fontSize = 14.sp,
+        fontSize = 16.sp,
         fontWeight = FontWeight.Normal,
         color = color, maxLines = 3,
         overflow = TextOverflow.Ellipsis

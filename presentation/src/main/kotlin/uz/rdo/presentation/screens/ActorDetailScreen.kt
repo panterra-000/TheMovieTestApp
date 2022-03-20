@@ -11,17 +11,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import uz.rdo.coreui.composable.base.columns.ColumnFillMaxWidthPadding
-import uz.rdo.coreui.composable.base.columns.ColumnScrollableFillMaxSize
-import uz.rdo.coreui.composable.views.AppBarViewWithIcons
-import uz.rdo.coreui.composable.views.AppLoader
-import uz.rdo.coreui.composable.views.RoundedImageView
 import uz.rdo.coreui.R
+import uz.rdo.coreui.composable.base.DividerMin
 import uz.rdo.coreui.composable.base.Spacer10dp
 import uz.rdo.coreui.composable.base.Spacer20dp
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSize
+import uz.rdo.coreui.composable.base.columns.ColumnFillMaxWidthPadding
+import uz.rdo.coreui.composable.base.columns.ColumnScrollableFillMaxSize
 import uz.rdo.coreui.composable.base.texts.*
+import uz.rdo.coreui.composable.customviews.MoviesGridTwoCells
+import uz.rdo.coreui.composable.views.AppBarViewWithIcons
+import uz.rdo.coreui.composable.views.AppLoader
+import uz.rdo.coreui.composable.views.RoundedImageView
 import uz.rdo.coreui.utils.getGenderFromApi
+import uz.rdo.coreui.viewdata.MovieItemViewData
+import uz.rdo.coreui.viewdata.movieMapperWithCastMovie
 import uz.rdo.presentation.navigations.MovieDetailNavigation
 import uz.rdo.presentation.viewmodels.ActorDetailViewModel
 import uz.rdo.remote.data.response.actor.ActorDetailResponse
@@ -34,7 +38,6 @@ fun ActorDetailScreen(
     navController: NavController,
     viewModel: ActorDetailViewModel = hiltViewModel()
 ) {
-
     val context = LocalContext.current
 
     LaunchedEffect(key1 = viewModel.actorDetailState, block = {
@@ -53,7 +56,7 @@ fun ActorDetailScreen(
 
     ActorDetailScreenView(viewModel = viewModel, backClick = {
         navController.navigateUp()
-    }, castClick = { movie ->
+    }, movieItemClick = { movie ->
         if (movie.id != null) {
             navController.navigate(MovieDetailNavigation.createRoute(movieId = movie.id!!))
         }
@@ -64,7 +67,7 @@ fun ActorDetailScreen(
 fun ActorDetailScreenView(
     viewModel: ActorDetailViewModel,
     backClick: () -> Unit,
-    castClick: (MovieCastItem) -> Unit
+    movieItemClick: (MovieItemViewData) -> Unit
 ) {
     ColumnFillMaxSize {
         AppBarViewWithIcons(
@@ -84,7 +87,9 @@ fun ActorDetailScreenView(
                 AppLoader()
             } else {
                 viewModel.actorCreditsState.value?.let { cast ->
-
+                    ActorCreditsView(cast, movieItemClick = { movie ->
+                        movieItemClick(movie)
+                    })
                 }
             }
         }
@@ -125,6 +130,22 @@ fun ActorMainDetailView(actor: ActorDetailResponse) {
             label = stringResource(R.string._gender),
             value = actor.gender?.getGenderFromApi().toString()
         )
+    }
+}
 
+@Composable
+fun ActorCreditsView(cast: List<MovieCastItem?>, movieItemClick: (MovieItemViewData) -> Unit) {
+    ColumnFillMaxSize {
+        Spacer20dp()
+        Text16spBold(text = stringResource(R.string._biography))
+        Spacer10dp()
+        DividerMin()
+        Spacer10dp()
+        MoviesGridTwoCells(
+            itemData = cast.movieMapperWithCastMovie(),
+            nextPage = { },
+            onclick = { movieItemClick(it) }
+        )
+        Spacer20dp()
     }
 }
