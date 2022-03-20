@@ -1,9 +1,11 @@
 package uz.rdo.presentation.screens
 
 import android.widget.Toast
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.ExperimentalUnitApi
@@ -17,6 +19,7 @@ import uz.rdo.coreui.composable.views.RoundedImageView
 import uz.rdo.coreui.R
 import uz.rdo.coreui.composable.base.Spacer10dp
 import uz.rdo.coreui.composable.base.Spacer20dp
+import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSize
 import uz.rdo.coreui.composable.base.texts.*
 import uz.rdo.coreui.utils.getGenderFromApi
 import uz.rdo.presentation.navigations.MovieDetailNavigation
@@ -63,25 +66,26 @@ fun ActorDetailScreenView(
     backClick: () -> Unit,
     castClick: (MovieCastItem) -> Unit
 ) {
-    ColumnScrollableFillMaxSize {
+    ColumnFillMaxSize {
         AppBarViewWithIcons(
             startIconClick = {
                 backClick()
             })
-
-        if (viewModel.loaderState.value) {
-            AppLoader()
-        } else {
-            viewModel.actorDetailState.value?.let {
-                ActorMainDetailView(it)
+        ColumnScrollableFillMaxSize {
+            if (viewModel.loaderState.value) {
+                AppLoader()
+            } else {
+                viewModel.actorDetailState.value?.let {
+                    ActorMainDetailView(it)
+                }
             }
-        }
 
-        if (viewModel.creditsLoaderState.value) {
-            AppLoader()
-        } else {
-            viewModel.actorCreditsState.value?.let { cast ->
+            if (viewModel.creditsLoaderState.value) {
+                AppLoader()
+            } else {
+                viewModel.actorCreditsState.value?.let { cast ->
 
+                }
             }
         }
     }
@@ -90,12 +94,15 @@ fun ActorDetailScreenView(
 @Composable
 fun ActorMainDetailView(actor: ActorDetailResponse) {
     ColumnFillMaxWidthPadding {
-        Row {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             RoundedImageView(size = 120, url = actor.profilePath) {
             }
-            Text24spBold(text = actor.name.toString())
-            Spacer10dp()
-            Text16spSecondary(text = stringResource(id = R.string._actor))
+            Spacer20dp()
+            Column() {
+                Text24spBold(text = actor.name.toString())
+                Spacer10dp()
+                Text16spSecondary(text = stringResource(id = R.string._actor))
+            }
         }
         Spacer20dp()
         Text16spBold(text = stringResource(R.string._biography))

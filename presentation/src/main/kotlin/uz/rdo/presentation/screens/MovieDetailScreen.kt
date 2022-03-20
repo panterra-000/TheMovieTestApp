@@ -14,6 +14,7 @@ import uz.rdo.coreui.R
 import uz.rdo.coreui.composable.base.DividerMin
 import uz.rdo.coreui.composable.base.Spacer10dp
 import uz.rdo.coreui.composable.base.Spacer20dp
+import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSize
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxWidthPadding
 import uz.rdo.coreui.composable.base.columns.ColumnScrollableFillMaxSize
 import uz.rdo.coreui.composable.base.texts.LabeledRowText
@@ -68,26 +69,27 @@ fun MovieDetailScreenView(
     backClick: () -> Unit,
     castClick: (ActorCastItem) -> Unit
 ) {
-    ColumnScrollableFillMaxSize {
+    ColumnFillMaxSize {
         AppBarViewWithIcons(title = stringResource(R.string._title_detail),
             startIconClick = {
                 backClick()
             })
-
-        if (viewModel.loaderState.value) {
-            AppLoader()
-        } else {
-            viewModel.movieDetailState.value?.let {
-                MainDetailView(it)
+        ColumnScrollableFillMaxSize {
+            if (viewModel.loaderState.value) {
+                AppLoader()
+            } else {
+                viewModel.movieDetailState.value?.let {
+                    MainDetailView(it)
+                }
             }
-        }
 
-        if (viewModel.creditsLoaderState.value) {
-            AppLoader()
-        } else {
-            viewModel.movieCreditsState.value?.let { cast ->
-                CastView(cast) { actor ->
-                    castClick(actor)
+            if (viewModel.creditsLoaderState.value) {
+                AppLoader()
+            } else {
+                viewModel.movieCreditsState.value?.let { cast ->
+                    CastView(cast) { actor ->
+                        castClick(actor)
+                    }
                 }
             }
         }
