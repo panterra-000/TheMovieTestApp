@@ -35,8 +35,8 @@ fun RoundedImageView(size: Int, url: String?, onclick: () -> Unit) {
         contentScale = ContentScale.Crop,
         modifier = Modifier
             .size(size.dp)
+            .clip(RoundedCornerShape(size / 2))
             .clickable { onclick() }
-            .clip(RoundedCornerShape(size / 2)),
     )
 }
 

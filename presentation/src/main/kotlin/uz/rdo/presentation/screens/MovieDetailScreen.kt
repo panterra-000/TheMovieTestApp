@@ -38,12 +38,12 @@ fun MovieDetailScreen(
 ) {
     val context = LocalContext.current
 
-    LaunchedEffect(key1 = Unit, block = {
+    LaunchedEffect(key1 = viewModel.movieDetailState, block = {
         viewModel.getMovieDetail(movieId)
         viewModel.getMovieCredits(movieId)
     })
 
-    LaunchedEffect(key1 = Unit, block = {
+    LaunchedEffect(key1 = viewModel.movieCreditsState, block = {
         viewModel.errorState.collect {
             Toast.makeText(context, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
         }
