@@ -8,7 +8,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSizeWithPadding
 import uz.rdo.coreui.composable.views.AppLoaderCenter
 import uz.rdo.coreui.composable.customviews.MoviesGrid
-import uz.rdo.remote.data.response.MovieItem
+import uz.rdo.remote.data.response.movie.MovieItem
 import uz.rdo.presentation.viewmodels.mainscreen.TopRatedMoviesViewModel
 
 

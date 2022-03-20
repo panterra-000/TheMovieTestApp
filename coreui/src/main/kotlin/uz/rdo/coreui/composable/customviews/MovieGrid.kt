@@ -15,7 +15,7 @@ import uz.rdo.coreui.composable.base.Spacer2dp
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSize
 import uz.rdo.coreui.composable.base.texts.EllipsizeText12sp
 import uz.rdo.coreui.composable.views.CorneredImageViewFillWidth
-import uz.rdo.remote.data.response.MovieItem
+import uz.rdo.remote.data.response.movie.MovieItem
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

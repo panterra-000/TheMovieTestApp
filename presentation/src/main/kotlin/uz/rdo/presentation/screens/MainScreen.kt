@@ -15,7 +15,7 @@ import uz.rdo.presentation.mainpages.PopularMoviesScreen
 import uz.rdo.presentation.mainpages.TopRatedMoviesScreen
 import uz.rdo.presentation.mainpages.UpcomingMoviesScreen
 import uz.rdo.presentation.navigations.MovieDetailNavigation
-import uz.rdo.remote.data.response.MovieItem
+import uz.rdo.remote.data.response.movie.MovieItem
 
 @ExperimentalUnitApi
 @ExperimentalPagerApi

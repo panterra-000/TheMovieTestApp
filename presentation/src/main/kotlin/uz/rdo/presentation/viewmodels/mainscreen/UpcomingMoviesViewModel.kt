@@ -11,7 +11,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import uz.rdo.core.NetworkResponse
-import uz.rdo.remote.data.response.MovieItem
+import uz.rdo.remote.data.response.movie.MovieItem
 import uz.rdo.remote.service.main.MainService
 import javax.inject.Inject
 

@@ -4,8 +4,8 @@ import io.ktor.client.*
 import uz.rdo.core.NetworkResponse
 import uz.rdo.core.util.ktor.getCatching
 import uz.rdo.core.util.ktor.getJson
-import uz.rdo.remote.data.response.MovieCreditsResponse
-import uz.rdo.remote.data.response.detail.MovieDetailResponse
+import uz.rdo.remote.data.response.movie.MovieCreditsResponse
+import uz.rdo.remote.data.response.movie.MovieDetailResponse
 import javax.inject.Inject
 
 class MovieDetailServiceImpl @Inject constructor(private val httpClient: HttpClient) :

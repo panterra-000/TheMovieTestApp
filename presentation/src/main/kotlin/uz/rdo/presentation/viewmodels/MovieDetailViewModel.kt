@@ -9,8 +9,8 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import uz.rdo.core.NetworkResponse
-import uz.rdo.remote.data.response.CastItem
-import uz.rdo.remote.data.response.detail.MovieDetailResponse
+import uz.rdo.remote.data.response.movie.CastItem
+import uz.rdo.remote.data.response.movie.MovieDetailResponse
 import uz.rdo.remote.service.moviedetail.MovieDetailService
 import javax.inject.Inject
 

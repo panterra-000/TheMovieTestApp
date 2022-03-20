@@ -1,4 +1,4 @@
-package uz.rdo.remote.data.response.detail
+package uz.rdo.remote.data.response.movie
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
