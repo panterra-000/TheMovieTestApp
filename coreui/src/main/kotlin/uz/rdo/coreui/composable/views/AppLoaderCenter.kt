@@ -18,3 +18,15 @@ fun AppLoaderCenter() {
         )
     }
 }
+
+
+@Composable
+fun AppLoader() {
+    Box(Modifier.padding(20.dp), contentAlignment = Alignment.Center) {
+        CircularProgressIndicator(
+            color = TheMovieTheme.colors.primaryButtonBackground,
+            modifier = Modifier
+                .size(36.dp)
+        )
+    }
+}

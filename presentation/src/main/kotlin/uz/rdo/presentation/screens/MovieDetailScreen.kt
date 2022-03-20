@@ -1,6 +1,8 @@
 package uz.rdo.presentation.screens
 
 import android.widget.Toast
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
@@ -16,11 +18,13 @@ import uz.rdo.coreui.composable.base.columns.ColumnScrollableFillMaxSize
 import uz.rdo.coreui.composable.base.texts.LabeledRowText
 import uz.rdo.coreui.composable.base.texts.Text14spSecondary
 import uz.rdo.coreui.composable.base.texts.Text16spBold
+import uz.rdo.coreui.composable.customviews.PersonItemView
 import uz.rdo.coreui.composable.views.AppBarViewWithIcons
-import uz.rdo.coreui.composable.views.AppLoaderCenter
+import uz.rdo.coreui.composable.views.AppLoader
 import uz.rdo.coreui.composable.views.MovieHeaderWithImage
 import uz.rdo.coreui.utils.timeSeparation
 import uz.rdo.presentation.viewmodels.MovieDetailViewModel
+import uz.rdo.remote.data.response.CastItem
 import uz.rdo.remote.data.response.detail.MovieDetailResponse
 
 @Composable
@@ -33,6 +37,7 @@ fun MovieDetailScreen(
 
     LaunchedEffect(key1 = Unit, block = {
         viewModel.getMovieDetail(movieId)
+        viewModel.getMovieCredits(movieId)
     })
 
     LaunchedEffect(key1 = Unit, block = {
@@ -41,47 +46,94 @@ fun MovieDetailScreen(
         }
     })
 
-    viewModel.movieDetailState.value?.let {
-        MovieDetailScreenView(movie = it) {
-            navController.navigateUp()
-        }
-    }
-
-    if (viewModel.loaderState.value) {
-        AppLoaderCenter()
+    MovieDetailScreenView(viewModel = viewModel) {
+        navController.navigateUp()
     }
 }
 
 @Composable
-fun MovieDetailScreenView(movie: MovieDetailResponse, backClick: () -> Unit) {
+fun MovieDetailScreenView(viewModel: MovieDetailViewModel, backClick: () -> Unit) {
     ColumnScrollableFillMaxSize {
         AppBarViewWithIcons(title = stringResource(R.string._title_detail),
             startIconClick = {
                 backClick()
             })
-        MovieHeaderWithImage(
-            coverImgUrl = movie.backdropPath.toString(),
-            posterImgUrl = movie.posterPath.toString(),
-            title = movie.originalTitle.toString()
-        )
-        DividerMin()
-        ColumnFillMaxWidthPadding {
-            Spacer20dp()
-            Text16spBold(text = stringResource(R.string._overview))
-            Spacer10dp()
-            Text14spSecondary(text = movie.overview.toString())
-            Spacer20dp()
-            Text16spBold(text = stringResource(R.string._facts))
-            Spacer10dp()
-            LabeledRowText(label = stringResource(R.string._status), value = movie.status.toString())
-            LabeledRowText(label = stringResource(R.string._realise_date), value = movie.releaseDate.toString())
-            LabeledRowText(label = stringResource(R.string._original_language), value = movie.originalLanguage.toString())
-            LabeledRowText(label = stringResource(R.string._runtime), value = (movie.runtime ?: 0).timeSeparation())
-            LabeledRowText(label = stringResource(R.string._budget), value = "\$${movie.budget.toString()}")
-            LabeledRowText(label = stringResource(R.string._revenue), value = "\$${movie.revenue.toString()}")
 
+        if (viewModel.loaderState.value) {
+            AppLoader()
+        } else {
+            viewModel.movieDetailState.value?.let {
+                MainDetailView(it)
+            }
+        }
 
-
+        if (viewModel.creditsLoaderState.value) {
+            AppLoader()
+        } else {
+            viewModel.movieCreditsState.value?.let { cast ->
+                CastView(cast)
+            }
         }
     }
 }
+
+@Composable
+fun MainDetailView(movie: MovieDetailResponse) {
+
+    MovieHeaderWithImage(
+        coverImgUrl = movie.backdropPath.toString(),
+        posterImgUrl = movie.posterPath.toString(),
+        title = movie.originalTitle.toString()
+    )
+    DividerMin()
+    ColumnFillMaxWidthPadding {
+        Spacer20dp()
+        Text16spBold(text = stringResource(R.string._overview))
+        Spacer10dp()
+        Text14spSecondary(text = movie.overview.toString())
+        Spacer20dp()
+        Text16spBold(text = stringResource(R.string._facts))
+        Spacer10dp()
+        LabeledRowText(
+            label = stringResource(R.string._status),
+            value = movie.status.toString()
+        )
+        LabeledRowText(
+            label = stringResource(R.string._realise_date),
+            value = movie.releaseDate.toString()
+        )
+        LabeledRowText(
+            label = stringResource(R.string._original_language),
+            value = movie.originalLanguage.toString()
+        )
+        LabeledRowText(
+            label = stringResource(R.string._runtime),
+            value = (movie.runtime ?: 0).timeSeparation()
+        )
+        LabeledRowText(
+            label = stringResource(R.string._budget),
+            value = "\$${movie.budget.toString()}"
+        )
+        LabeledRowText(
+            label = stringResource(R.string._revenue),
+            value = "\$${movie.revenue.toString()}"
+        )
+    }
+}
+
+@Composable
+fun CastView(list: List<CastItem?>) {
+    LazyRow() {
+        items(list) { actor ->
+            if (actor != null) {
+                PersonItemView(
+                    fullName = actor.name.toString(),
+                    character = actor.character.toString(),
+                    avatarUrl = actor.profilePath
+                )
+            }
+        }
+    }
+}
+
+

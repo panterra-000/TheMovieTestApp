@@ -26,16 +26,17 @@ fun RoundedImageView(size: Int, url: String?) {
 
     Image(
         painter = rememberImagePainter(
-            data = url ?: R.drawable.movie_place_holder, builder = {
+            data = if (url != null) "${BuildConfig.IMAGE_BASE_URL}/w500$url" else R.drawable.movie_place_holder,
+            builder = {
                 placeholder(R.drawable.movie_place_holder)
             }
         ),
         contentDescription = null,
+        contentScale = ContentScale.Crop,
         modifier = Modifier
             .size(size.dp)
             .clip(RoundedCornerShape(size / 2)),
     )
-
 }
 
 

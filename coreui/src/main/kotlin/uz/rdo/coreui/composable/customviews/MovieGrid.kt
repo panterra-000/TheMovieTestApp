@@ -1,4 +1,4 @@
-package uz.rdo.coreui.composable.views
+package uz.rdo.coreui.composable.customviews
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import uz.rdo.coreui.composable.base.Spacer2dp
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSize
 import uz.rdo.coreui.composable.base.texts.EllipsizeText12sp
+import uz.rdo.coreui.composable.views.CorneredImageViewFillWidth
 import uz.rdo.remote.data.response.MovieItem
 
 @OptIn(ExperimentalFoundationApi::class)
