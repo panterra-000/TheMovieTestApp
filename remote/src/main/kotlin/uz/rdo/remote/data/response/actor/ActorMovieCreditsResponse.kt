@@ -60,7 +60,7 @@ data class MovieCastItem(
 	val popularity: Double? = null,
 
 	@SerialName("id")
-	val id: Int? = null,
+	val id: Long? = null,
 
 	@SerialName("adult")
 	val adult: Boolean? = null,

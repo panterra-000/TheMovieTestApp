@@ -26,6 +26,7 @@ import uz.rdo.coreui.composable.views.MovieHeaderWithImage
 import uz.rdo.coreui.utils.timeSeparation
 import uz.rdo.presentation.navigations.ActorDetailNavigation
 import uz.rdo.presentation.viewmodels.MovieDetailViewModel
+import uz.rdo.remote.data.response.actor.ActorDetailResponse
 import uz.rdo.remote.data.response.movie.ActorCastItem
 import uz.rdo.remote.data.response.movie.MovieDetailResponse
 

@@ -21,4 +21,16 @@
     <string name="_budget">Budget</string>
     <string name="_revenue">Revenue</string>
 
+    <!--Actor Detail-->
+    <string name="_actor">Actor</string>
+    <string name="_biography">Biography</string>
+    <string name="_detail">Detail</string>
+    <string name="_full_name">Full Name</string>
+    <string name="_place_of_birth">Place of Birth</string>
+    <string name="_birthday">Birth Day</string>
+    <string name="_death_day">Death Day</string>
+    <string name="_gender">Gender</string>
+    <string name="_gender_male">Male</string>
+    <string name="_gender_female">Female</string>
+
 </resources>

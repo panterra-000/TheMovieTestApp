@@ -1,21 +1,30 @@
 package uz.rdo.presentation.screens
 
 import android.widget.Toast
+import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import uz.rdo.coreui.R
+import uz.rdo.coreui.composable.base.columns.ColumnFillMaxWidthPadding
 import uz.rdo.coreui.composable.base.columns.ColumnScrollableFillMaxSize
 import uz.rdo.coreui.composable.views.AppBarViewWithIcons
+import uz.rdo.coreui.composable.views.AppLoader
+import uz.rdo.coreui.composable.views.RoundedImageView
+import uz.rdo.coreui.R
+import uz.rdo.coreui.composable.base.Spacer10dp
+import uz.rdo.coreui.composable.base.Spacer20dp
+import uz.rdo.coreui.composable.base.texts.*
+import uz.rdo.coreui.utils.getGenderFromApi
+import uz.rdo.presentation.navigations.MovieDetailNavigation
 import uz.rdo.presentation.viewmodels.ActorDetailViewModel
-import uz.rdo.presentation.viewmodels.MovieDetailViewModel
 import uz.rdo.remote.data.response.actor.ActorDetailResponse
 import uz.rdo.remote.data.response.actor.MovieCastItem
-import uz.rdo.remote.data.response.movie.ActorCastItem
 
+@ExperimentalUnitApi
 @Composable
 fun ActorDetailScreen(
     actorId: String,
@@ -41,10 +50,11 @@ fun ActorDetailScreen(
 
     ActorDetailScreenView(viewModel = viewModel, backClick = {
         navController.navigateUp()
-    }, castClick = {
-
+    }, castClick = { movie ->
+        if (movie.id != null) {
+            navController.navigate(MovieDetailNavigation.createRoute(movieId = movie.id!!))
+        }
     })
-
 }
 
 @Composable
@@ -54,11 +64,60 @@ fun ActorDetailScreenView(
     castClick: (MovieCastItem) -> Unit
 ) {
     ColumnScrollableFillMaxSize {
-        AppBarViewWithIcons(title = stringResource(R.string._title_detail),
+        AppBarViewWithIcons(
             startIconClick = {
                 backClick()
             })
 
+        if (viewModel.loaderState.value) {
+            AppLoader()
+        } else {
+            viewModel.actorDetailState.value?.let {
+                ActorMainDetailView(it)
+            }
+        }
+
+        if (viewModel.creditsLoaderState.value) {
+            AppLoader()
+        } else {
+            viewModel.actorCreditsState.value?.let { cast ->
+
+            }
+        }
+    }
+}
+
+@Composable
+fun ActorMainDetailView(actor: ActorDetailResponse) {
+    ColumnFillMaxWidthPadding {
+        Row {
+            RoundedImageView(size = 120, url = actor.profilePath) {
+            }
+            Text24spBold(text = actor.name.toString())
+            Spacer10dp()
+            Text16spSecondary(text = stringResource(id = R.string._actor))
+        }
+        Spacer20dp()
+        Text16spBold(text = stringResource(R.string._biography))
+        Spacer10dp()
+        Text14spSecondary(text = actor.biography.toString())
+        Spacer20dp()
+        Text16spBold(text = stringResource(R.string._detail))
+        Spacer10dp()
+        LabeledRowText(label = stringResource(R.string._full_name), value = actor.name.toString())
+        LabeledRowText(
+            label = stringResource(R.string._birthday),
+            value = actor.birthday.toString()
+        )
+        LabeledRowText(label = stringResource(R.string._death_day), value = actor.deathday ?: "")
+        LabeledRowText(
+            label = stringResource(R.string._place_of_birth),
+            value = actor.placeOfBirth.toString()
+        )
+        LabeledRowText(
+            label = stringResource(R.string._gender),
+            value = actor.gender?.getGenderFromApi().toString()
+        )
 
     }
 }
