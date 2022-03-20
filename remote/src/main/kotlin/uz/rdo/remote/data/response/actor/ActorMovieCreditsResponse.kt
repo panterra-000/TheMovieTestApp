@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 data class ActorMovieCreditsResponse(
 
 	@SerialName("cast")
-	val cast: List<CastItem?>? = null,
+	val cast: List<MovieCastItem?>? = null,
 
 	@SerialName("id")
 	val id: Int? = null,
@@ -18,7 +18,7 @@ data class ActorMovieCreditsResponse(
 )
 
 @kotlinx.serialization.Serializable
-data class CastItem(
+data class MovieCastItem(
 
 	@SerialName("overview")
 	val overview: String? = null,

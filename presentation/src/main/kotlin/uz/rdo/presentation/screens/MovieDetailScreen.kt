@@ -26,7 +26,7 @@ import uz.rdo.coreui.composable.views.MovieHeaderWithImage
 import uz.rdo.coreui.utils.timeSeparation
 import uz.rdo.presentation.navigations.ActorDetailNavigation
 import uz.rdo.presentation.viewmodels.MovieDetailViewModel
-import uz.rdo.remote.data.response.movie.CastItem
+import uz.rdo.remote.data.response.movie.ActorCastItem
 import uz.rdo.remote.data.response.movie.MovieDetailResponse
 
 @ExperimentalUnitApi
@@ -40,10 +40,13 @@ fun MovieDetailScreen(
 
     LaunchedEffect(key1 = viewModel.movieDetailState, block = {
         viewModel.getMovieDetail(movieId)
-        viewModel.getMovieCredits(movieId)
     })
 
     LaunchedEffect(key1 = viewModel.movieCreditsState, block = {
+        viewModel.getMovieCredits(movieId)
+    })
+
+    LaunchedEffect(key1 = viewModel.errorState, block = {
         viewModel.errorState.collect {
             Toast.makeText(context, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
         }
@@ -62,7 +65,7 @@ fun MovieDetailScreen(
 fun MovieDetailScreenView(
     viewModel: MovieDetailViewModel,
     backClick: () -> Unit,
-    castClick: (CastItem) -> Unit
+    castClick: (ActorCastItem) -> Unit
 ) {
     ColumnScrollableFillMaxSize {
         AppBarViewWithIcons(title = stringResource(R.string._title_detail),
@@ -135,7 +138,7 @@ fun MainDetailView(movie: MovieDetailResponse) {
 }
 
 @Composable
-fun CastView(list: List<CastItem?>, itemClick: (CastItem) -> Unit) {
+fun CastView(list: List<ActorCastItem?>, itemClick: (ActorCastItem) -> Unit) {
     ColumnFillMaxWidthPadding {
         Spacer20dp()
         Text16spBold(text = stringResource(R.string._cast))

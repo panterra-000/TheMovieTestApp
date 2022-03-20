@@ -32,7 +32,7 @@ object ActorDetailNavigation : ScreenNavigationSpec {
         navBackStackEntry: NavBackStackEntry,
     ) {
         ActorDetailScreen(
-            actorId = navBackStackEntry.arguments?.getInt(ACTOR_ID) ?: 0,
+            actorId = navBackStackEntry.arguments?.getString(ACTOR_ID) ?: "0",
             navController = navController
         )
     }

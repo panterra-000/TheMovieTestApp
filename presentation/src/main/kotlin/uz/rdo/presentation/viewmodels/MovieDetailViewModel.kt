@@ -9,7 +9,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import uz.rdo.core.NetworkResponse
-import uz.rdo.remote.data.response.movie.CastItem
+import uz.rdo.remote.data.response.movie.ActorCastItem
 import uz.rdo.remote.data.response.movie.MovieDetailResponse
 import uz.rdo.remote.service.moviedetail.MovieDetailService
 import javax.inject.Inject
@@ -30,7 +30,7 @@ class MovieDetailViewModel @Inject constructor(private val service: MovieDetailS
     private val _creditsLoaderState: MutableState<Boolean> = mutableStateOf(false)
     val creditsLoaderState: MutableState<Boolean> = _creditsLoaderState
 
-    private val _movieCreditsState: MutableState<List<CastItem?>?> = mutableStateOf(null)
+    private val _movieCreditsState: MutableState<List<ActorCastItem?>?> = mutableStateOf(null)
     val movieCreditsState get() = _movieCreditsState
 
     fun getMovieDetail(id: String) {
@@ -54,7 +54,7 @@ class MovieDetailViewModel @Inject constructor(private val service: MovieDetailS
         viewModelScope.launch() {
             when (val resp = service.getMovieCredits(id)) {
                 is NetworkResponse.Success -> {
-                    _movieCreditsState.value = resp.result.cast
+                    _movieCreditsState.value = resp.result.actorCast
                     loaderState.value = false
                 }
                 is NetworkResponse.Error -> {

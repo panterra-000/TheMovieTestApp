@@ -9,8 +9,8 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import uz.rdo.core.NetworkResponse
-import uz.rdo.remote.data.response.movie.CastItem
 import uz.rdo.remote.data.response.actor.ActorDetailResponse
+import uz.rdo.remote.data.response.actor.MovieCastItem
 import uz.rdo.remote.service.actordetail.ActorDetailService
 import javax.inject.Inject
 
@@ -30,15 +30,31 @@ class ActorDetailViewModel @Inject constructor(private val service: ActorDetailS
     private val _creditsLoaderState: MutableState<Boolean> = mutableStateOf(false)
     val creditsLoaderState: MutableState<Boolean> = _creditsLoaderState
 
-    private val _actorCreditsState: MutableState<List<CastItem?>?> = mutableStateOf(null)
+    private val _actorCreditsState: MutableState<List<MovieCastItem?>?> = mutableStateOf(null)
     val actorCreditsState get() = _actorCreditsState
 
-    fun getMovieDetail(id: String) {
+    fun getActorDetail(id: String) {
         loaderState.value = true
         viewModelScope.launch() {
             when (val resp = service.getActorDetailData(id)) {
                 is NetworkResponse.Success -> {
                     _actorDetailState.value = resp.result
+                    loaderState.value = false
+                }
+                is NetworkResponse.Error -> {
+                    loaderState.value = false
+                    _errorState.send(resp)
+                }
+            }
+        }
+    }
+
+    fun getActorCredits(id: String) {
+        loaderState.value = true
+        viewModelScope.launch() {
+            when (val resp = service.getActorCreditsData(id)) {
+                is NetworkResponse.Success -> {
+                    _actorCreditsState.value = resp.result.cast
                     loaderState.value = false
                 }
                 is NetworkResponse.Error -> {
