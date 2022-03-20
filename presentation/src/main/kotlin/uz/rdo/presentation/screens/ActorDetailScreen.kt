@@ -19,6 +19,7 @@ import uz.rdo.coreui.R
 import uz.rdo.coreui.composable.base.DividerMin
 import uz.rdo.coreui.composable.base.Spacer10dp
 import uz.rdo.coreui.composable.base.Spacer20dp
+import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSize
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxWidthPadding
 import uz.rdo.coreui.composable.base.texts.*
 import uz.rdo.coreui.composable.customviews.MovieItemForLazyColumn
@@ -71,7 +72,7 @@ fun ActorDetailScreenView(
     backClick: () -> Unit,
     movieItemClick: (MovieItemViewData) -> Unit
 ) {
-    Column(Modifier.fillMaxWidth()) {
+    ColumnFillMaxSize {
         AppBarViewWithIcons(
             startIconClick = {
                 backClick()
