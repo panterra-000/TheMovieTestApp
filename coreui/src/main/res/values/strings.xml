@@ -5,6 +5,19 @@
     <string name="_title_popular">Popular</string>
     <string name="_title_top_rated">Top rated</string>
     <string name="_title_upcoming">Upcoming</string>
+
+    <!--additional-->
     <string name="_hour">h</string>
     <string name="_minute">m</string>
+
+    <!--Movie Detail-->
+    <string name="_overview">Overview</string>
+    <string name="_facts">Facts</string>
+    <string name="_status">Status</string>
+    <string name="_realise_date">Realise Date</string>
+    <string name="_original_language">Original Language</string>
+    <string name="_runtime">Runtime</string>
+    <string name="_budget">Budget</string>
+    <string name="_revenue">Revenue</string>
+
 </resources>
