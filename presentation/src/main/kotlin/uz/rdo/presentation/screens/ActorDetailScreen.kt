@@ -1,35 +1,37 @@
 package uz.rdo.presentation.screens
 
 import android.widget.Toast
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.ExperimentalUnitApi
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import uz.rdo.coreui.R
 import uz.rdo.coreui.composable.base.DividerMin
 import uz.rdo.coreui.composable.base.Spacer10dp
 import uz.rdo.coreui.composable.base.Spacer20dp
-import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSize
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxWidthPadding
-import uz.rdo.coreui.composable.base.columns.ColumnScrollableFillMaxSize
 import uz.rdo.coreui.composable.base.texts.*
-import uz.rdo.coreui.composable.customviews.MoviesGridTwoCells
+import uz.rdo.coreui.composable.customviews.MovieItemForLazyColumn
 import uz.rdo.coreui.composable.views.AppBarViewWithIcons
 import uz.rdo.coreui.composable.views.AppLoader
 import uz.rdo.coreui.composable.views.RoundedImageView
+import uz.rdo.coreui.theme.TheMovieTheme
 import uz.rdo.coreui.utils.getGenderFromApi
 import uz.rdo.coreui.viewdata.MovieItemViewData
 import uz.rdo.coreui.viewdata.movieMapperWithCastMovie
 import uz.rdo.presentation.navigations.MovieDetailNavigation
 import uz.rdo.presentation.viewmodels.ActorDetailViewModel
 import uz.rdo.remote.data.response.actor.ActorDetailResponse
-import uz.rdo.remote.data.response.actor.MovieCastItem
 
 @ExperimentalUnitApi
 @Composable
@@ -69,27 +71,40 @@ fun ActorDetailScreenView(
     backClick: () -> Unit,
     movieItemClick: (MovieItemViewData) -> Unit
 ) {
-    ColumnFillMaxSize {
+    Column(Modifier.fillMaxWidth()) {
         AppBarViewWithIcons(
             startIconClick = {
                 backClick()
             })
-        ColumnScrollableFillMaxSize {
-            if (viewModel.loaderState.value) {
-                AppLoader()
-            } else {
-                viewModel.actorDetailState.value?.let {
-                    ActorMainDetailView(it)
+        LazyColumn(
+            Modifier
+                .fillMaxWidth()
+                .background(TheMovieTheme.colors.primary)
+        ) {
+            item {
+                if (viewModel.loaderState.value) {
+                    AppLoader()
+                } else {
+                    viewModel.actorDetailState.value?.let {
+                        ActorMainDetailView(it)
+                    }
                 }
             }
 
             if (viewModel.creditsLoaderState.value) {
-                AppLoader()
+                item {
+                    AppLoader()
+                }
             } else {
                 viewModel.actorCreditsState.value?.let { cast ->
-                    ActorCreditsView(cast, movieItemClick = { movie ->
-                        movieItemClick(movie)
-                    })
+                    item {
+                        ActorCreditsHeaderView()
+                    }
+                    items(cast.movieMapperWithCastMovie()) { movie ->
+                        MovieItemForLazyColumn(itemData = movie) {
+                            movieItemClick(movie)
+                        }
+                    }
                 }
             }
         }
@@ -134,18 +149,9 @@ fun ActorMainDetailView(actor: ActorDetailResponse) {
 }
 
 @Composable
-fun ActorCreditsView(cast: List<MovieCastItem?>, movieItemClick: (MovieItemViewData) -> Unit) {
-    ColumnFillMaxSize {
-        Spacer20dp()
-        Text16spBold(text = stringResource(R.string._biography))
-        Spacer10dp()
-        DividerMin()
-        Spacer10dp()
-        MoviesGridTwoCells(
-            itemData = cast.movieMapperWithCastMovie(),
-            nextPage = { },
-            onclick = { movieItemClick(it) }
-        )
-        Spacer20dp()
+fun ActorCreditsHeaderView() {
+    DividerMin()
+    Box(Modifier.padding(horizontal = 20.dp, vertical = 10.dp)) {
+        Text16spBold(text = stringResource(R.string._cast_films))
     }
 }

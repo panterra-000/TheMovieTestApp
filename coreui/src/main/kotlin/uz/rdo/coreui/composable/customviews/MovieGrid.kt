@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import uz.rdo.coreui.composable.base.Spacer2dp
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSize
 import uz.rdo.coreui.composable.base.texts.EllipsizeText12sp
-import uz.rdo.coreui.composable.base.texts.EllipsizeText16sp
 import uz.rdo.coreui.composable.views.CorneredImageViewFillWidth
 import uz.rdo.coreui.viewdata.MovieItemViewData
 
@@ -45,35 +44,6 @@ fun MoviesGrid(
     }
 }
 
-
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun MoviesGridTwoCells(
-    itemData: List<MovieItemViewData?>,
-    nextPage: () -> Unit,
-    onclick: (MovieItemViewData) -> Unit
-) {
-    ColumnFillMaxSize {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2), modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            itemsIndexed(itemData) { index, item ->
-                if (index == itemData.lastIndex) {
-                    nextPage()
-                }
-                if (item != null)
-                    MovieItemViewForTwoCells(
-                        itemData = item
-                    ) {
-                        onclick(item)
-                    }
-            }
-        }
-    }
-}
-
-
 @Composable
 fun MovieItemView(itemData: MovieItemViewData?, onclick: () -> Unit) {
     Column(
@@ -89,17 +59,3 @@ fun MovieItemView(itemData: MovieItemViewData?, onclick: () -> Unit) {
     }
 }
 
-@Composable
-fun MovieItemViewForTwoCells(itemData: MovieItemViewData?, onclick: () -> Unit) {
-    Column(
-        Modifier
-            .padding(10.dp)
-            .height(210.dp)
-    ) {
-        CorneredImageViewFillWidth(url = itemData?.posterPath) {
-            onclick()
-        }
-        Spacer2dp()
-        EllipsizeText16sp(text = itemData?.title.toString())
-    }
-}

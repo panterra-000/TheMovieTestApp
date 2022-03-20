@@ -32,5 +32,6 @@
     <string name="_gender">Gender</string>
     <string name="_gender_male">Male</string>
     <string name="_gender_female">Female</string>
+    <string name="_cast_films">Cast Films</string>
 
 </resources>

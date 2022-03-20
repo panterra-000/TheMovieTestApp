@@ -42,6 +42,21 @@ fun Text16spBold(
     )
 }
 
+
+@Composable
+fun Text16spBoldActive(
+    text: String,
+    color: Color = TheMovieTheme.colors.primaryButtonBackground,
+    ellipsize: Boolean = false
+) {
+    Text(
+        text = text,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Bold,
+        color = color,
+    )
+}
+
 @Composable
 fun Text16spBoldSingleLine(
     text: String,

@@ -19,7 +19,7 @@ class ActorDetailServiceImpl @Inject constructor(private val httpClient: HttpCli
 
     override suspend fun getActorCreditsData(actorId: String): NetworkResponse<ActorMovieCreditsResponse> {
         return getCatching {
-            httpClient.getJson(urlAddress = createDetailUrl(actorId))
+            httpClient.getJson(urlAddress = createCreditsUrl(actorId))
         }
     }
 

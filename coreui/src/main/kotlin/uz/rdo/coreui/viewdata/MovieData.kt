@@ -6,7 +6,8 @@ import uz.rdo.remote.data.response.movie.MovieItem
 data class MovieItemViewData(
     val id: Long? = null,
     val title: String? = null,
-    val posterPath: String? = null
+    val posterPath: String? = null,
+    val realiseDate: String? = null
 )
 
 fun List<MovieItem?>.movieMapper(): List<MovieItemViewData> {
@@ -14,7 +15,8 @@ fun List<MovieItem?>.movieMapper(): List<MovieItemViewData> {
         MovieItemViewData(
             id = movie?.id,
             title = movie?.title,
-            posterPath = movie?.posterPath
+            posterPath = movie?.posterPath,
+            realiseDate = movie?.releaseDate
         )
     }
 }
@@ -24,7 +26,8 @@ fun List<MovieCastItem?>.movieMapperWithCastMovie(): List<MovieItemViewData> {
         MovieItemViewData(
             id = movie?.id,
             title = movie?.title,
-            posterPath = movie?.posterPath
+            posterPath = movie?.posterPath,
+            realiseDate = movie?.releaseDate
         )
     }
 }

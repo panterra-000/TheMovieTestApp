@@ -65,6 +65,28 @@ fun CorneredImageViewFillWidth(height: Dp = 130.dp, url: String?, onclick: () ->
 
 
 @Composable
+fun CorneredSquareImageView(size: Dp = 70.dp, url: String?, onclick: () -> Unit) {
+
+    Image(
+        painter = rememberImagePainter(
+            data = "${BuildConfig.IMAGE_BASE_URL}/w500$url",
+            builder = {
+                placeholder(R.drawable.movie_place_holder)
+            },
+        ),
+        contentDescription = null,
+        contentScale = ContentScale.Crop,
+        modifier = Modifier
+            .size(size)
+            .clip(RoundedCornerShape(15.dp))
+            .clickable {
+                onclick()
+            },
+    )
+}
+
+
+@Composable
 fun CorneredImageView(height: Dp = 130.dp, url: String?, onclick: () -> Unit) {
 
     Image(
