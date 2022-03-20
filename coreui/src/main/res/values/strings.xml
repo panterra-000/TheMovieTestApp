@@ -5,4 +5,6 @@
     <string name="_title_popular">Popular</string>
     <string name="_title_top_rated">Top rated</string>
     <string name="_title_upcoming">Upcoming</string>
+    <string name="_hour">h</string>
+    <string name="_minute">m</string>
 </resources>

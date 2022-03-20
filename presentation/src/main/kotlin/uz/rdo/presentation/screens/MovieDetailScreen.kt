@@ -11,14 +11,17 @@ import androidx.navigation.NavController
 import uz.rdo.coreui.R
 import uz.rdo.coreui.composable.base.DividerMin
 import uz.rdo.coreui.composable.base.Spacer10dp
+import uz.rdo.coreui.composable.base.Spacer20dp
 import uz.rdo.coreui.composable.base.Spacer50dp
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSize
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxWidthPadding
 import uz.rdo.coreui.composable.base.columns.ColumnScrollableFillMaxSize
+import uz.rdo.coreui.composable.base.texts.LabeledRowText
 import uz.rdo.coreui.composable.base.texts.Text14spSecondary
 import uz.rdo.coreui.composable.base.texts.Text16spBold
 import uz.rdo.coreui.composable.base.texts.Text16spSecondary
 import uz.rdo.coreui.composable.views.*
+import uz.rdo.coreui.utils.timeSeparation
 import uz.rdo.presentation.viewmodels.MovieDetailViewModel
 import uz.rdo.remote.data.response.detail.MovieDetailResponse
 
@@ -41,7 +44,7 @@ fun MovieDetailScreen(
     })
 
     viewModel.movieDetailState.value?.let {
-        MovieDetailScreenView(movieDetailResponse = it) {
+        MovieDetailScreenView(movie = it) {
             navController.navigateUp()
         }
     }
@@ -52,22 +55,32 @@ fun MovieDetailScreen(
 }
 
 @Composable
-fun MovieDetailScreenView(movieDetailResponse: MovieDetailResponse, backClick: () -> Unit) {
+fun MovieDetailScreenView(movie: MovieDetailResponse, backClick: () -> Unit) {
     ColumnScrollableFillMaxSize {
         AppBarViewWithIcons(title = stringResource(R.string._title_detail),
             startIconClick = {
                 backClick()
             })
         MovieHeaderWithImage(
-            coverImgUrl = movieDetailResponse.backdropPath.toString(),
-            posterImgUrl = movieDetailResponse.posterPath.toString(),
-            title = movieDetailResponse.originalTitle.toString()
+            coverImgUrl = movie.backdropPath.toString(),
+            posterImgUrl = movie.posterPath.toString(),
+            title = movie.originalTitle.toString()
         )
         DividerMin()
         ColumnFillMaxWidthPadding {
+            Spacer20dp()
             Text16spBold(text = stringResource(uz.rdo.presentation.R.string._overview))
             Spacer10dp()
-            Text14spSecondary(text = movieDetailResponse.overview.toString())
+            Text14spSecondary(text = movie.overview.toString())
+            Spacer20dp()
+            Text16spBold(text = stringResource(uz.rdo.presentation.R.string._facts))
+            Spacer10dp()
+            LabeledRowText(label = "Status", value = movie.status.toString())
+            LabeledRowText(label = "Realise Date", value = movie.releaseDate.toString())
+            LabeledRowText(label = "Original Language", value = movie.originalLanguage.toString())
+            LabeledRowText(label = "Runtime", value = (movie.runtime ?: 0).timeSeparation())
+            LabeledRowText(label = "Budget", value = "\$${movie.budget.toString()}")
+            LabeledRowText(label = "Revenue", value = "\$${movie.revenue.toString()}")
         }
     }
 }
