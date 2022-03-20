@@ -75,7 +75,9 @@ data class TheMovieColors(
     val activeIconTint: Color,
     val inactiveIconTint: Color,
     val indicatorTint: Color,
-)
+    val primaryDividerBackground: Color,
+
+    )
 
 val LocalColors = staticCompositionLocalOf<TheMovieColors> {
     error("No LocalColors specified")

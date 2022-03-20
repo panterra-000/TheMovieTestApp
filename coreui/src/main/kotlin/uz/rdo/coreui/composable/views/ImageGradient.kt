@@ -84,15 +84,17 @@ fun MovieHeaderWithImage(posterImgUrl: String, coverImgUrl: String, title: Strin
             Text(
                 text = title, modifier = Modifier
                     .background(TheMovieTheme.colors.primary)
-                    .padding(20.dp),
-                fontSize = 16.sp,
+                    .padding(start = 130.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
+                fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 color = TheMovieTheme.colors.primaryText
             )
         }
-        Column(modifier = Modifier
-            .align(Alignment.BottomStart)
-            .padding(horizontal = 20.dp)) {
+        Column(
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(horizontal = 20.dp)
+        ) {
             CorneredImageView(url = posterImgUrl) {
             }
             Spacer2dp()

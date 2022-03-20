@@ -31,6 +31,7 @@ object ThemeColor {
         activeIconTint = Color(0xffffffff),
         inactiveIconTint = Color(0xff929294),
         indicatorTint = Color(0xffFF9F0A),
+        primaryDividerBackground = Color(0xFF725527),
     )
 
     private val themeDark = TheMovieColors(
@@ -52,6 +53,7 @@ object ThemeColor {
         activeIconTint = Color(0xffffffff),
         inactiveIconTint = Color(0xff929294),
         indicatorTint = Color(0xffFF9F0A),
+        primaryDividerBackground = Color(0xFF725527),
     )
 
 
