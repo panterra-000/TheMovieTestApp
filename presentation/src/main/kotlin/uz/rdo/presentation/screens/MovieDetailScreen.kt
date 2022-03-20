@@ -154,7 +154,7 @@ fun CastView(list: List<CastItem?>, itemClick: (CastItem) -> Unit) {
                 }
             }
         }
-
+        Spacer20dp()
     }
 }
 
