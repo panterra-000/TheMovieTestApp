@@ -8,10 +8,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import uz.rdo.coreui.R
+import uz.rdo.coreui.composable.base.Spacer50dp
 import uz.rdo.coreui.composable.base.columns.ColumnFillMaxSize
-import uz.rdo.coreui.composable.views.AppBarViewWithIcons
-import uz.rdo.coreui.composable.views.AppLoaderCenter
-import uz.rdo.coreui.composable.views.BackDropImageWithAlpha
+import uz.rdo.coreui.composable.views.*
 import uz.rdo.presentation.viewmodels.MovieDetailViewModel
 import uz.rdo.remote.data.response.detail.MovieDetailResponse
 
@@ -51,8 +50,15 @@ fun MovieDetailScreenView(movieDetailResponse: MovieDetailResponse, backClick: (
             startIconClick = {
                 backClick()
             })
-        BackDropImageWithAlpha(url = movieDetailResponse.backdropPath) {
+//        BackDropImageWithAlpha(url = movieDetailResponse.backdropPath) {
+//
+//        }
 
-        }
+        MovieHeaderWithImage(
+            coverImgUrl = movieDetailResponse.backdropPath.toString(),
+            posterImgUrl = movieDetailResponse.posterPath.toString(),
+            title = movieDetailResponse.originalTitle.toString()
+        )
+
     }
 }

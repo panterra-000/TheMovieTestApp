@@ -46,7 +46,7 @@ fun MovieItemView(item: MovieItem, onclick: () -> Unit) {
             .padding(10.dp)
             .height(170.dp)
     ) {
-        CorneredImageView(url = item.posterPath) {
+        CorneredImageViewFillWidth(url = item.posterPath) {
             onclick()
         }
         Spacer2dp()

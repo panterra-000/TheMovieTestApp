@@ -39,6 +39,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
 }
 
 dependencies {
@@ -65,10 +66,7 @@ dependencies {
     api("androidx.constraintlayout:constraintlayout-compose:1.0.0")
     api("com.google.accompanist:accompanist-pager:0.23.0")
     api("com.google.accompanist:accompanist-pager-indicators:0.23.0")
-
-    // If using indicators, also depend on
-    api( "com.google.accompanist:accompanist-systemuicontroller:0.23.0")
-
+    api("com.google.accompanist:accompanist-systemuicontroller:0.23.0")
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'

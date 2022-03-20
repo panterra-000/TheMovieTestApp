@@ -4,10 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.BlurredEdgeTreatment
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -37,7 +40,7 @@ fun RoundedImageView(size: Int, url: String?) {
 
 
 @Composable
-fun CorneredImageView(height: Dp = 130.dp, url: String?, onclick: () -> Unit) {
+fun CorneredImageViewFillWidth(height: Dp = 130.dp, url: String?, onclick: () -> Unit) {
 
     Image(
         painter = rememberImagePainter(
@@ -51,17 +54,40 @@ fun CorneredImageView(height: Dp = 130.dp, url: String?, onclick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .height(height = height)
-            .clip(RoundedCornerShape(20.dp))
+            .clip(RoundedCornerShape(15.dp))
             .clickable {
                 onclick()
             },
     )
 }
 
+
+@Composable
+fun CorneredImageView(height: Dp = 130.dp, url: String?, onclick: () -> Unit) {
+
+    Image(
+        painter = rememberImagePainter(
+            data = "${BuildConfig.IMAGE_BASE_URL}/w500$url",
+            builder = {
+                placeholder(R.drawable.movie_place_holder)
+            },
+        ),
+        contentDescription = null,
+        contentScale = ContentScale.Crop,
+        modifier = Modifier
+            .width(90.dp)
+            .height(height = height)
+            .clip(RoundedCornerShape(15.dp))
+            .clickable {
+                onclick()
+            },
+    )
+}
+
+
 @Composable
 fun BackDropImageWithAlpha(height: Dp = 240.dp, url: String?, onclick: () -> Unit) {
     Surface(
-        color = Color.Black.copy(alpha = 0.2f),
         modifier = Modifier
             .fillMaxWidth()
             .height(height)
@@ -83,5 +109,12 @@ fun BackDropImageWithAlpha(height: Dp = 240.dp, url: String?, onclick: () -> Uni
                 },
         )
 
+        Box(
+            Modifier
+                .fillMaxSize()
+                .background(Color.Red.copy(alpha = 0.7f), CircleShape)
+        )
+
     }
 }
+
